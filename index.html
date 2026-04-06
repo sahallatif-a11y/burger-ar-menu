@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AR Restaurant Menu</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <style>
+      .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .arjs-loader div {
+        text-align: center;
+        font-size: 1.25em;
+        color: white;
+      }
+    </style>
+  </head>
+  <body style="margin: 0px; overflow: hidden">
+    <!-- minimal loader shown until image descriptors are loaded -->
+    <div class="arjs-loader">
+      <div>Loading AR Menu...</div>
+    </div>
+
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+    >
+      <!-- NFT (Natural Feature Tracking) Marker -->
+      <!-- 'url' should point to the NFT descriptor files (without extension) -->
+      <!-- For this example, we'll use a public Hiro descriptor as a placeholder, -->
+      <!-- but for a real menu, you'd generate one from your menu image. -->
+      <a-nft
+        type="nft"
+        url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
+        smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
+      >
+        <!-- Content to display on top of the menu -->
+        <a-entity scale="50 50 50" position="100 0 -100" rotation="-90 0 0">
+          <!-- Main Menu Background -->
+          <a-plane
+            position="0 0 0"
+            width="2.5"
+            height="3.5"
+            color="#1a1a1a"
+            material="opacity: 0.95; transparent: true"
+          ></a-plane>
+
+          <!-- Menu Header -->
+          <a-text
+            value="MENU BURGER"
+            position="0 1.5 0.01"
+            align="center"
+            width="5"
+            color="#ffffff"
+            font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"
+          ></a-text>
+
+          <!-- Burger 1 -->
+          <a-entity position="-0.7 0.8 0.01">
+            <a-text value="BURGER" color="#ff6600" width="3" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+            <a-text
+              value="FOOD NAME\nLorem ipsum dolor sit amet\n$7.49"
+              position="0 -0.4 0"
+              color="#ffffff"
+              width="2"
+            ></a-text>
+          </a-entity>
+
+          <!-- Burger 2 -->
+          <a-entity position="-0.7 0 0.01">
+            <a-text value="BIG BURGER" color="#ff6600" width="3" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+            <a-text
+              value="FOOD NAME\nLorem ipsum dolor sit amet\n$8.49"
+              position="0 -0.4 0"
+              color="#ffffff"
+              width="2"
+            ></a-text>
+          </a-entity>
+
+          <!-- Burger 3 -->
+          <a-entity position="-0.7 -0.8 0.01">
+            <a-text value="PREMIUM" color="#ff6600" width="3" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+            <a-text
+              value="FOOD NAME\nLorem ipsum dolor sit amet\n$9.49"
+              position="0 -0.4 0"
+              color="#ffffff"
+              width="2"
+            ></a-text>
+          </a-entity>
+
+          <!-- Visual Elements (Burger Representation) -->
+          <a-entity position="0.7 0.8 0.5" rotation="90 45 0">
+              <!-- Bun Top -->
+              <a-sphere radius="0.4" phi-length="180" rotation="0 0 0" color="#d2b48c" position="0 0.1 0" scale="1 0.5 1"></a-sphere>
+              <!-- Patty -->
+              <a-cylinder radius="0.45" height="0.1" color="#8b4513" position="0 0.05 0"></a-cylinder>
+              <!-- Bun Bottom -->
+              <a-cylinder radius="0.4" height="0.1" color="#d2b48c" position="0 0 0"></a-cylinder>
+              <!-- Price Tag -->
+              <a-text value="$7.49" position="0.5 0.2 0" rotation="0 0 0" color="#ff6600" width="2"></a-text>
+          </a-entity>
+
+          <a-entity position="0.7 0 0.5" rotation="90 45 0">
+              <!-- Big Burger - Extra Layer -->
+              <a-sphere radius="0.4" phi-length="180" rotation="0 0 0" color="#d2b48c" position="0 0.2 0" scale="1 0.5 1"></a-sphere>
+              <a-cylinder radius="0.45" height="0.1" color="#8b4513" position="0 0.15 0"></a-cylinder>
+              <a-cylinder radius="0.45" height="0.05" color="#00ff00" position="0 0.1 0"></a-cylinder>
+              <a-cylinder radius="0.45" height="0.1" color="#8b4513" position="0 0.05 0"></a-cylinder>
+              <a-cylinder radius="0.4" height="0.1" color="#d2b48c" position="0 0 0"></a-cylinder>
+              <!-- Price Tag -->
+              <a-text value="$8.49" position="0.5 0.3 0" rotation="0 0 0" color="#ff6600" width="2"></a-text>
+          </a-entity>
+
+          <a-entity position="0.7 -0.8 0.5" rotation="90 45 0">
+              <!-- Black Bun Top -->
+              <a-sphere radius="0.4" phi-length="180" rotation="0 0 0" color="#333333" position="0 0.1 0" scale="1 0.5 1"></a-sphere>
+              <!-- Patty -->
+              <a-cylinder radius="0.45" height="0.1" color="#8b4513" position="0 0.05 0"></a-cylinder>
+              <!-- Black Bun Bottom -->
+              <a-cylinder radius="0.4" height="0.1" color="#333333" position="0 0 0"></a-cylinder>
+              <!-- Price Tag -->
+              <a-text value="$9.49" position="0.5 0.2 0" rotation="0 0 0" color="#ff6600" width="2"></a-text>
+          </a-entity>
+
+          <!-- Footer -->
+          <a-text
+            value="FREE DELIVERY: +22 456 8787"
+            position="0 -1.5 0.01"
+            align="center"
+            width="2.5"
+            color="#ff6600"
+          ></a-text>
+        </a-entity>
+      </a-nft>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+      window.addEventListener("camera-init", (data) => {
+        console.log("camera-init", data);
+      });
+
+      window.addEventListener("camera-error", (error) => {
+        console.log("camera-error", error);
+      });
+
+      // Remove loader after scene is loaded
+      document.querySelector("a-scene").addEventListener("loaded", () => {
+        document.querySelector(".arjs-loader").style.display = "none";
+      });
+    </script>
+  </body>
+</html>
